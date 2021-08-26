@@ -47,18 +47,19 @@ namespace dgv_edit_test
             dataGridView1.Left = 0;
         }
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+
+        private void button1_Click(object sender, EventArgs e)
         {
-            //「SelectedRows.Count」は選択された行の数を返します
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                //「SelectedRows[0].Cells[1]」は重要な部分です! 0, 1 ,2 ,3...
-
-                
-                //"(string)dataGridView1.SelectedRows[0].Cells[1].Value"
-                //は最初に選択された列から2番目のセルを取得します。2つ目の値は
-                //「Name」という名前で「String」型であることがわかっているので「String」にキャストします。
-                txtEdit.Text = (string)dataGridView1.SelectedRows[0].Cells[1].Value;
+                //SampleObject: 0 - ID(int),  1 - Name(string), 2 - Date(DateTime)
+                //DataGridView1.SelectedRows[0] - currently selected row
+                //.Cells[x] = Cells[0] = ID, Cells[1] = Name = Cells[2] = Date
+                int id = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+                string name = (string)dataGridView1.SelectedRows[0].Cells[1].Value;
+                DateTime date = (DateTime)dataGridView1.SelectedRows[0].Cells[2].Value;
+                EditForm edf = new EditForm(id, name, date);
+                edf.ShowDialog();
             }
         }
     }
